@@ -1,0 +1,46 @@
+name: Civitai 图片下载器
+
+on:
+  # 允许你从 GitHub 的 "Actions" 页面手动触发此工作流
+  workflow_dispatch:
+
+  # (可选) 设置定时任务，自动运行脚本。
+  # 下面的示例是每天凌晨3点 (UTC时间) 运行一次。去掉 '#' 即可启用。
+  # schedule:
+  #   - cron: '0 3 * * *'
+
+jobs:
+  download-images:
+    # 使用最新的 Ubuntu 运行环境
+    runs-on: ubuntu-latest
+
+    steps:
+      # 第一步: 拉取你的仓库代码
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      # 第二步: 设置 Python 环境
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' # 可以指定一个具体的 Python 版本
+
+      # 第三步: 安装 Python 脚本所需的库
+      - name: 安装依赖库
+        run: pip install requests
+
+      # 第四步: 运行下载脚本
+      - name: 运行 Python 脚本下载图片
+        run: python civitai_downloader.py
+        env:
+          # 将你在 GitHub Secrets 中设置的 API 密钥注入到环境变量中
+          CIVITAI_API_KEY: ${{ secrets.CIVITAI_API_KEY }}
+
+      # 第五步: 将下载的图片打包上传
+      - name: 上传下载好的图片作为构建产物 (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          # 构建产物的名称
+          name: civitai-images
+          # 需要上传的文件夹路径
+          path: downloaded_images/
