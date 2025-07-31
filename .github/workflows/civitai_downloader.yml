@@ -1,0 +1,81 @@
+# .github/workflows/civitai_downloader.yml
+name: Civitai Creator Image Downloader
+
+on:
+  # 允许你从Actions标签页手动触发此工作流
+  workflow_dispatch:
+    inputs:
+      creator_username:
+        description: 'Creator Username (创作者用户名)'
+        required: true
+        default: 'civitai'
+      nsfw_level:
+        description: 'NSFW Level (NSFW 等级)'
+        type: choice
+        required: true
+        default: 'None'
+        options:
+          - 'None'
+          - 'Soft'
+          - 'Mature'
+          - 'X'
+      sort_by:
+        description: 'Sort Order (排序方式)'
+        type: choice
+        required: true
+        default: 'Newest'
+        options:
+          - 'Newest'
+          - 'Most Reactions'
+          - 'Most Comments'
+      time_period:
+        description: 'Time Period for Sort (排序时间范围)'
+        type: choice
+        required: true
+        default: 'AllTime'
+        options:
+          - 'AllTime'
+          - 'Year'
+          - 'Month'
+          - 'Week'
+          - 'Day'
+
+  # (可选) 设置定时任务，例如每天凌晨3点自动运行
+  # schedule:
+  #   - cron: '0 3 * * *'
+
+jobs:
+  download-images:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 1. Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 3. Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: 4. Run Downloader Script
+        run: |
+          python download_creator_images.py \
+            --username "${{ github.event.inputs.creator_username || 'civitai' }}" \
+            --nsfw "${{ github.event.inputs.nsfw_level || 'None' }}" \
+            --sort "${{ github.event.inputs.sort_by || 'Newest' }}" \
+            --period "${{ github.event.inputs.time_period || 'AllTime' }}" \
+            --output-dir "./downloads" \
+            --skip-existing
+            
+      - name: 5. Upload Artifacts
+        if: always() # 即使上一步失败也尝试上传已下载的文件
+        uses: actions/upload-artifact@v4
+        with:
+          name: civitai-images-${{ github.event.inputs.creator_username || 'scheduled' }}-${{ github.run_id }}
+          path: ./downloads/
+          if-no-files-found: 'warn' # 如果没有文件则只警告不报错
