@@ -1,5 +1,5 @@
 # .github/workflows/civitai_downloader.yml
-name: Civitai Creator Image Downloader
+name: new Downloader
 
 on:
   workflow_dispatch:
