@@ -1,0 +1,100 @@
+# .github/workflows/civitai_downloader.yml
+name: Civitai Creator Image Downloader
+
+on:
+  workflow_dispatch:
+    inputs:
+      creator_username:
+        description: 'Creator Username (创作者用户名)'
+        required: true
+        default: 'civitai'
+      nsfw_level:
+        description: 'NSFW Level (NSFW 等级)'
+        type: choice
+        required: true
+        default: 'None (仅限安全)' # <-- 修改：默认值改为 None
+        options:
+          # - 'All (所有等级)' # <-- 移除：去掉了 All 选项
+          - 'None (仅限安全)'
+          - 'Soft'
+          - 'Mature'
+          - 'X'
+      sort_by:
+        description: 'Sort Order (排序方式)'
+        type: choice
+        required: true
+        default: 'Newest'
+        options:
+          - 'Newest'
+          - 'Most Reactions'
+          - 'Most Comments'
+      time_period:
+        description: 'Time Period for Sort (排序时间范围)'
+        type: choice
+        required: true
+        default: 'AllTime'
+        options:
+          - 'AllTime'
+          - 'Year'
+          - 'Month'
+          - 'Week'
+          - 'Day'
+      # --- 新增的自定义选项 ---
+      page_limit:
+        description: 'Page Size / Limit (每页数量, 1-200)'
+        type: number
+        default: 100
+      image_count: # <-- 新增：自定义下载数量
+        description: 'Download Count (下载数量, 0表示所有)'
+        type: number
+        default: 0
+      download_threads:
+        description: 'Download Threads (下载线程数, 1-32)'
+        type: number
+        default: 10
+      jpeg_quality:
+        description: 'JPEG Quality (JPEG 质量, 1-95)'
+        type: number
+        default: 85
+
+jobs:
+  download-images:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 1. Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 3. Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: 4. Run Downloader Script with new options
+        run: |
+          # 从 'None (仅限安全)' 这样的输入中提取出 'None'
+          NSFW_CHOICE=$(echo "${{ github.event.inputs.nsfw_level || 'None' }}" | awk '{print $1}') # <-- 修改：默认值改为 None
+          
+          python new.py \
+            --username "${{ github.event.inputs.creator_username || 'civitai' }}" \
+            --nsfw "$NSFW_CHOICE" \
+            --sort "${{ github.event.inputs.sort_by || 'Newest' }}" \
+            --period "${{ github.event.inputs.time_period || 'AllTime' }}" \
+            --limit ${{ github.event.inputs.page_limit || 100 }} \
+            --image-count ${{ github.event.inputs.image_count || 0 }} \
+            --threads ${{ github.event.inputs.download_threads || 10 }} \
+            --jpeg-quality ${{ github.event.inputs.jpeg_quality || 85 }} \
+            --output-dir "./output" # 将最终产物统一放到 output 目录
+            
+      - name: 5. Upload Zipped Archive as Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: civitai-images-${{ github.event.inputs.creator_username || 'scheduled' }}-${{ github.run_id }}
+          path: ./output/*.zip # 只上传最终的zip文件
+          if-no-files-found: 'warn'
