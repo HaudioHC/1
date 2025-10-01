@@ -2,7 +2,7 @@
 name: Civitai Creator Sync
 
 on:
-  # 1. 允许手动触发，并添加了新选项
+  # 手动触发时，仍然是针对单个作者
   workflow_dispatch:
     inputs:
       creator_username:
@@ -14,43 +14,34 @@ on:
         type: choice
         required: true
         default: 'X'
-        options:
-          - 'None'
-          - 'Soft'
-          - 'Mature'
-          - 'X'
+        options: ['None', 'Soft', 'Mature', 'X']
       sort_by:
         description: 'Sort Order'
         type: choice
         required: true
         default: 'Newest'
-        options:
-          - 'Newest'
-          - 'Most Reactions'
-          - 'Most Comments'
+        options: ['Newest', 'Most Reactions', 'Most Comments']
       threads:
         description: 'Download Threads (1-32)'
         type: number
         default: 16
 
-  # 2. 定时触发：每天 0点 (UTC) 运行一次
+  # 定时触发：每天 0点 (UTC) 运行一次
   schedule:
     - cron: '0 0 * * *'
 
 jobs:
   sync-and-report:
     runs-on: ubuntu-latest
-    
-    # 关键修复：授予 job 写入仓库的权限
     permissions:
       contents: write
 
-    # 为定时任务设置默认值
-    env:
-      CREATOR_USERNAME: 'civitai' # 定时任务监控的默认作者
-      NSFW_LEVEL: 'X'
-      SORT_BY: 'Newest'
-      THREADS: 16
+    # --- 核心改动：使用 Matrix 策略 ---
+    strategy:
+      fail-fast: false # 即使一个作者的任务失败了，其他作者的任务也会继续运行
+      matrix:
+        # 在这里列出所有你想要定时监控的作者
+        creator: ['kenzo111', 'SAKI88'] 
 
     steps:
       - name: 1. Checkout repository
@@ -65,42 +56,67 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
-      - name: 4. Determine Parameters
-        # 如果是手动触发，使用输入的参数覆盖默认值
+      
+      # 改动：脚本的参数现在根据触发方式来决定
+      - name: 4. Run Sync and Report Script
+        # 使用 if 判断是手动触发还是定时触发
+        # github.event_name == 'workflow_dispatch' 表示是手动触发
         run: |
-          if [ -n "${{ github.event.inputs.creator_username }}" ]; then
-            echo "Running with manual inputs..."
-            echo "CREATOR_USERNAME=${{ github.event.inputs.creator_username }}" >> $GITHUB_ENV
-            echo "NSFW_LEVEL=${{ github.event.inputs.nsfw_level }}" >> $GITHUB_ENV
-            echo "SORT_BY=${{ github.event.inputs.sort_by }}" >> $GITHUB_ENV
-            echo "THREADS=${{ github.event.inputs.threads }}" >> $GITHUB_ENV
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Running manually for: ${{ github.event.inputs.creator_username }}"
+            python sync_and_report.py \
+              --username "${{ github.event.inputs.creator_username }}" \
+              --nsfw "${{ github.event.inputs.nsfw_level }}" \
+              --sort "${{ github.event.inputs.sort_by }}" \
+              --threads ${{ github.event.inputs.threads }} \
+              --output-dir "./output"
           else
-            echo "Running with scheduled defaults..."
+            echo "Running scheduled job for: ${{ matrix.creator }}"
+            python sync_and_report.py \
+              --username "${{ matrix.creator }}" \
+              --nsfw "X" \
+              --sort "Newest" \
+              --threads 16 \
+              --output-dir "./output"
           fi
 
-      - name: 5. Run Sync and Report Script
+      - name: 5. Commit and Push Changes
+        # 提交信息也需要根据触发方式变化
         run: |
-          python sync_and_report.py \
-            --username "${{ env.CREATOR_USERNAME }}" \
-            --nsfw "${{ env.NSFW_LEVEL }}" \
-            --sort "${{ env.SORT_BY }}" \
-            --threads ${{ env.THREADS }} \
-            --output-dir "./output"
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --global user.name "GitHub Actions Bot"
+            git config --global user.email "actions@github.com"
+            git add output/*.json output/reports/*
+            
+            # 使用不同的 commit message
+            if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+              git commit -m "ci: Manual sync for ${{ github.event.inputs.creator_username }}"
+            else
+              git commit -m "ci: Scheduled sync for ${{ matrix.creator }}"
+            fi
+            
+            git push
+          else
+            echo "No changes to commit."
+          fi
+          
+      - name: 6. Upload New Images Zip as Artifact
+        # 上传产物的名字也需要动态生成
+        run: |
+          ZIP_FILE=$(ls ./output/*.zip 2>/dev/null)
+          if [ -n "$ZIP_FILE" ]; then
+            if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+              ARTIFACT_NAME="new-images-${{ github.event.inputs.creator_username }}-${{ github.run_id }}"
+            else
+              ARTIFACT_NAME="new-images-${{ matrix.creator }}-${{ github.run_id }}"
+            fi
+            echo "ARTIFACT_NAME=${ARTIFACT_NAME}" >> $GITHUB_ENV
+            echo "ZIP_PATH=${ZIP_FILE}" >> $GITHUB_ENV
+          fi
 
-      - name: 6. Commit and Push Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: actions/upload-artifact@v4
+        if: env.ARTIFACT_NAME
         with:
-          commit_message: "ci: Auto-sync for ${{ env.CREATOR_USERNAME }} (NSFW=${{ env.NSFW_LEVEL }}, Sort=${{ env.SORT_BY }})"
-          # 更新文件匹配模式以包含新的清单文件名格式
-          file_pattern: "output/*.json output/reports/*"
-          commit_user_name: "GitHub Actions Bot"
-          commit_user_email: "actions@github.com"
-          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
-
-      - name: 7. Upload New Images Zip as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: new-images-${{ env.CREATOR_USERNAME }}-${{ github.run_id }}
-          path: ./output/*.zip
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ZIP_PATH }}
           if-no-files-found: 'ignore'
