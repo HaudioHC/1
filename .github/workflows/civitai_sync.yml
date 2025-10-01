@@ -29,6 +29,10 @@ on:
   # 定时触发：每天 0点 (UTC) 运行一次
   schedule:
     - cron: '0 0 * * *'
+# --- ↓↓↓ 添加下面这两行 ↓↓↓ ---
+concurrency:
+  group: ${{ github.workflow }}
+# --- ↑↑↑ 添加上面这两行 ↑↑↑ ---
 
 jobs:
   sync-and-report:
