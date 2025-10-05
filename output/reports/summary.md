@@ -1,17 +1,14 @@
-# Civitai 同步报告 - 2025-10-04 00:40:19 UTC
+# Civitai 同步报告 - 2025-10-05 00:48:11 UTC
 
-- **新增图片**: 8 张
-- **删除图片**: 1 张
+- **新增图片**: 5 张
+- **删除图片**: 0 张
 
 ## 新增图片详情
-- ID: 103837463, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/5732f376-edb5-4593-a516-b83303895a9a/original=true/5732f376-edb5-4593-a516-b83303895a9a.jpeg
-- ID: 103837242, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/193a02d7-dee6-4a4f-a0ec-90b56d66e536/original=true/193a02d7-dee6-4a4f-a0ec-90b56d66e536.jpeg
-- ID: 103930028, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/6858dc78-6aad-480d-9f7a-1855ef29278a/original=true/6858dc78-6aad-480d-9f7a-1855ef29278a.jpeg
-- ID: 103836978, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/29bf1cfc-2244-49fd-b8d7-912bcc187d0f/original=true/29bf1cfc-2244-49fd-b8d7-912bcc187d0f.jpeg
-- ID: 103929875, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/101a10cd-6af1-49ac-8a65-eb07d457fae0/original=true/101a10cd-6af1-49ac-8a65-eb07d457fae0.jpeg
-- ID: 103929913, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/76cdb913-6320-42ab-a70e-75e9deb7f96a/original=true/76cdb913-6320-42ab-a70e-75e9deb7f96a.jpeg
-- ID: 103973757, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/41ca3b47-c763-41b9-913d-77c3227663c5/original=true/41ca3b47-c763-41b9-913d-77c3227663c5.jpeg
-- ID: 103836846, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/8f659e45-3bdb-4d13-a71a-e457eb0ccb75/original=true/8f659e45-3bdb-4d13-a71a-e457eb0ccb75.jpeg
+- ID: 104069321, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/89fa99aa-3128-41c6-94a9-7f71730f1845/original=true/89fa99aa-3128-41c6-94a9-7f71730f1845.jpeg
+- ID: 104058641, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/2f3190c9-7b2c-42e8-8914-c173157d1eeb/original=true/2f3190c9-7b2c-42e8-8914-c173157d1eeb.jpeg
+- ID: 104060464, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/2b46db1d-9e08-4850-88c4-fd9b7027a937/original=true/2b46db1d-9e08-4850-88c4-fd9b7027a937.jpeg
+- ID: 104069385, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/35d66121-88fc-4f5d-8382-ef9ed74d2683/original=true/35d66121-88fc-4f5d-8382-ef9ed74d2683.jpeg
+- ID: 104070157, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/6d2e1862-9e89-4d52-8a11-0532d5d1264a/original=true/6d2e1862-9e89-4d52-8a11-0532d5d1264a.jpeg
 
 ## 删除图片详情
-- ID: 103759491, Username: SAKI88
+无
