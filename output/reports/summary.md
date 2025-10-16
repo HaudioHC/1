@@ -1,15 +1,15 @@
-# Civitai 同步报告 - 2025-10-15 00:44:43 UTC
+# Civitai 同步报告 - 2025-10-16 00:44:51 UTC
 
 - **新增图片**: 6 张
-- **删除图片**: 1 张
+- **删除图片**: 0 张
 
 ## 新增图片详情
-- ID: 106069385, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/74380b91-f51e-4a9e-8031-7862c3cf71dc/original=true/74380b91-f51e-4a9e-8031-7862c3cf71dc.jpeg
-- ID: 106012293, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/2398ea7d-3854-4595-ad7e-9d4a8be20c09/original=true/2398ea7d-3854-4595-ad7e-9d4a8be20c09.jpeg
-- ID: 106078168, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/e2d3513d-35d8-4909-9754-0a4d2764c486/original=true/e2d3513d-35d8-4909-9754-0a4d2764c486.jpeg
-- ID: 106012331, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/8155d205-9212-4dc9-9470-8f7dbc5a956a/original=true/8155d205-9212-4dc9-9470-8f7dbc5a956a.jpeg
-- ID: 106069551, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/3cd7c7d3-df28-4a59-9f32-09e555e38127/original=true/3cd7c7d3-df28-4a59-9f32-09e555e38127.jpeg
-- ID: 106078284, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/62d6c88e-ba35-4764-9249-d6ceb1945de6/original=true/62d6c88e-ba35-4764-9249-d6ceb1945de6.jpeg
+- ID: 106162696, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/179076c8-acd8-429b-ba10-d98c3c44e6d7/original=true/179076c8-acd8-429b-ba10-d98c3c44e6d7.jpeg
+- ID: 106160376, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/d268576f-0189-4abd-805a-c45a55b7c93d/original=true/d268576f-0189-4abd-805a-c45a55b7c93d.jpeg
+- ID: 106198947, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/22993ad8-12c2-4ecb-a20f-607c55830f39/original=true/22993ad8-12c2-4ecb-a20f-607c55830f39.jpeg
+- ID: 106189919, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/6a27fed3-5af6-4925-b8b3-e71a88381ab8/original=true/6a27fed3-5af6-4925-b8b3-e71a88381ab8.jpeg
+- ID: 106169621, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/c85b325c-46f2-409c-a03c-ac8f15ca54ab/original=true/c85b325c-46f2-409c-a03c-ac8f15ca54ab.jpeg
+- ID: 106159928, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/cfc2002a-b17b-49ba-b10f-537f4012a59b/original=true/cfc2002a-b17b-49ba-b10f-537f4012a59b.jpeg
 
 ## 删除图片详情
-- ID: 105930351, Username: SAKI88
+无
