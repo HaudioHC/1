@@ -1,26 +1,70 @@
-# Civitai 同步报告 - 2026-03-26 01:12:14 UTC
+# Civitai 同步报告 - 2026-03-27 01:11:53 UTC
 
-- **新增图片**: 4 张
-- **删除图片**: 14 张
+- **新增图片**: 16 张
+- **删除图片**: 46 张
 
 ## 新增图片详情
-- ID: 125347461, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/38a03fcf-f13a-4f8d-8f51-cf4a5a46761e/original=true/38a03fcf-f13a-4f8d-8f51-cf4a5a46761e.jpeg
-- ID: 125347398, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/e993ecbb-77b0-444d-ad91-157f35a49e38/original=true/e993ecbb-77b0-444d-ad91-157f35a49e38.jpeg
-- ID: 125347400, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/4f59ccd4-3449-4e24-8096-fe1b77d01244/original=true/4f59ccd4-3449-4e24-8096-fe1b77d01244.jpeg
-- ID: 125347460, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/cc2864ca-c014-4aa7-a71b-0527ab8647cf/original=true/cc2864ca-c014-4aa7-a71b-0527ab8647cf.jpeg
+- ID: 73945337, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/b3a57bb1-1e26-4902-806d-cf0d9e89711f/original=true/b3a57bb1-1e26-4902-806d-cf0d9e89711f.jpeg
+- ID: 73709942, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/9e5662e9-941e-4d1b-aaf2-4a647f5989cf/original=true/9e5662e9-941e-4d1b-aaf2-4a647f5989cf.jpeg
+- ID: 73709909, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/b6c8361c-02c6-4b7d-be1b-872e3bf82160/original=true/b6c8361c-02c6-4b7d-be1b-872e3bf82160.jpeg
+- ID: 73709907, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/6ec6c4e0-3d03-4a24-8956-8e7dc6f3f725/original=true/6ec6c4e0-3d03-4a24-8956-8e7dc6f3f725.jpeg
+- ID: 73709908, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/824beb57-7044-4263-b177-47ee09d04b34/original=true/824beb57-7044-4263-b177-47ee09d04b34.jpeg
+- ID: 73945335, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/f5cc6c7f-a413-4720-b79d-a140f5bce8f5/original=true/f5cc6c7f-a413-4720-b79d-a140f5bce8f5.jpeg
+- ID: 73945468, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/5e725887-2c02-4c19-b004-45a70bb2e418/original=true/5e725887-2c02-4c19-b004-45a70bb2e418.jpeg
+- ID: 73945339, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/6a7884cc-d262-4db8-9d3b-dfc1f4edda91/original=true/6a7884cc-d262-4db8-9d3b-dfc1f4edda91.jpeg
+- ID: 125439262, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/ba5967b0-aff0-4b75-a9c3-6a13f75355b6/original=true/ba5967b0-aff0-4b75-a9c3-6a13f75355b6.jpeg
+- ID: 73945334, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/731f380b-dcfc-484b-85b4-32c76f483876/original=true/731f380b-dcfc-484b-85b4-32c76f483876.jpeg
+- ID: 73945338, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/ec8e8c77-af68-4295-bb6b-f95921bb2f9e/original=true/ec8e8c77-af68-4295-bb6b-f95921bb2f9e.jpeg
+- ID: 125439263, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/6a7b1054-3735-4116-8dd7-97a02517d7cb/original=true/6a7b1054-3735-4116-8dd7-97a02517d7cb.jpeg
+- ID: 73945332, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/cce7d523-141a-48d6-aee5-13e1175c85ef/original=true/cce7d523-141a-48d6-aee5-13e1175c85ef.jpeg
+- ID: 73945336, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/8dc9a87f-8256-410e-8dbe-c622306bed16/original=true/8dc9a87f-8256-410e-8dbe-c622306bed16.jpeg
+- ID: 73945333, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/b5221dd0-fbbb-4045-b09e-1ddcad24d247/original=true/b5221dd0-fbbb-4045-b09e-1ddcad24d247.jpeg
+- ID: 73709943, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/5c816707-8c6c-48e6-9357-ce6ba7de5469/original=true/5c816707-8c6c-48e6-9357-ce6ba7de5469.jpeg
 
 ## 删除图片详情
-- ID: 73945339, Username: kenzo111
-- ID: 73709942, Username: kenzo111
-- ID: 73945335, Username: kenzo111
-- ID: 73945332, Username: kenzo111
-- ID: 73709909, Username: kenzo111
-- ID: 73945334, Username: kenzo111
-- ID: 73945337, Username: kenzo111
-- ID: 73945333, Username: kenzo111
-- ID: 73709908, Username: kenzo111
-- ID: 73945338, Username: kenzo111
-- ID: 73709907, Username: kenzo111
-- ID: 73709943, Username: kenzo111
-- ID: 73945336, Username: kenzo111
-- ID: 73945468, Username: kenzo111
+- ID: 119580560, Username: kenzo111
+- ID: 119580492, Username: kenzo111
+- ID: 15515708, Username: kenzo111
+- ID: 111763397, Username: kenzo111
+- ID: 111763514, Username: kenzo111
+- ID: 15515967, Username: kenzo111
+- ID: 111763447, Username: kenzo111
+- ID: 7340936, Username: kenzo111
+- ID: 7384229, Username: kenzo111
+- ID: 7384384, Username: kenzo111
+- ID: 119580559, Username: kenzo111
+- ID: 7341006, Username: kenzo111
+- ID: 119701240, Username: kenzo111
+- ID: 15515968, Username: kenzo111
+- ID: 15515971, Username: kenzo111
+- ID: 111763513, Username: kenzo111
+- ID: 119580969, Username: kenzo111
+- ID: 111763582, Username: kenzo111
+- ID: 111763395, Username: kenzo111
+- ID: 119701082, Username: kenzo111
+- ID: 15515976, Username: kenzo111
+- ID: 119701143, Username: kenzo111
+- ID: 111763566, Username: kenzo111
+- ID: 15515710, Username: kenzo111
+- ID: 15515709, Username: kenzo111
+- ID: 119701144, Username: kenzo111
+- ID: 119701246, Username: kenzo111
+- ID: 111763568, Username: kenzo111
+- ID: 15515703, Username: kenzo111
+- ID: 119701078, Username: kenzo111
+- ID: 15515706, Username: kenzo111
+- ID: 119580558, Username: kenzo111
+- ID: 111763624, Username: kenzo111
+- ID: 15515980, Username: kenzo111
+- ID: 15515974, Username: kenzo111
+- ID: 119580968, Username: kenzo111
+- ID: 111763422, Username: kenzo111
+- ID: 111763625, Username: kenzo111
+- ID: 15515704, Username: kenzo111
+- ID: 15515707, Username: kenzo111
+- ID: 111763423, Username: kenzo111
+- ID: 111763446, Username: kenzo111
+- ID: 119580491, Username: kenzo111
+- ID: 111763585, Username: kenzo111
+- ID: 119580557, Username: kenzo111
+- ID: 15515700, Username: kenzo111
