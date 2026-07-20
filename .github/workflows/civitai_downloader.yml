@@ -12,7 +12,7 @@ on:
         description: 'NSFW Level (NSFW 等级)'
         type: choice
         required: true
-        default: 'All (所有等级)'
+        default: 'X'
         options:
           - 'All (所有等级)'
           - 'None (仅限安全)'
@@ -39,7 +39,6 @@ on:
           - 'Month'
           - 'Week'
           - 'Day'
-      # --- 新增的自定义选项 ---
       page_limit:
         description: 'Page Size / Limit (每页数量, 1-200)'
         type: number
@@ -51,7 +50,15 @@ on:
       jpeg_quality:
         description: 'JPEG Quality (JPEG 质量, 1-95)'
         type: number
-        default: 85
+        default: 92
+      scan_passes:
+        description: 'Scan Passes (列表扫描轮数, 取并集, 1-10)'
+        type: number
+        default: 3
+      download_retries:
+        description: 'Download Retries (下载失败重试次数, 0-10)'
+        type: number
+        default: 3
 
 jobs:
   download-images:
@@ -73,8 +80,8 @@ jobs:
           
       - name: 4. Run Downloader Script with new options
         run: |
-          # 从 'All (所有等级)' 这样的输入中提取出 'All'
-          NSFW_CHOICE=$(echo "${{ github.event.inputs.nsfw_level || 'All' }}" | awk '{print $1}')
+          # 从 'All (所有等级)' 这样的输入中提取出 'All'；默认 X
+          NSFW_CHOICE=$(echo "${{ github.event.inputs.nsfw_level || 'X' }}" | awk '{print $1}')
           
           python download_creator_images.py \
             --username "${{ github.event.inputs.creator_username || 'civitai' }}" \
@@ -83,13 +90,19 @@ jobs:
             --period "${{ github.event.inputs.time_period || 'AllTime' }}" \
             --limit ${{ github.event.inputs.page_limit || 100 }} \
             --threads ${{ github.event.inputs.download_threads || 10 }} \
-            --jpeg-quality ${{ github.event.inputs.jpeg_quality || 85 }} \
-            --output-dir "./output" # 将最终产物统一放到 output 目录
+            --jpeg-quality ${{ github.event.inputs.jpeg_quality || 92 }} \
+            --scan-passes ${{ github.event.inputs.scan_passes || 3 }} \
+            --download-retries ${{ github.event.inputs.download_retries || 3 }} \
+            --output-dir "./output" \
+            --no-zip
+          # --no-zip：直接产出 JPEG，避免 Artifact 二次打包形成「zip 套 zip」
             
-      - name: 5. Upload Zipped Archive as Artifact
+      - name: 5. Upload Images as Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: civitai-images-${{ github.event.inputs.creator_username || 'scheduled' }}-${{ github.run_id }}
-          path: ./output/*.zip # 只上传最终的zip文件
+          # 上传图片文件本身；下载 Artifact 解压后直接是图片
+          path: ./output/**/*.jpeg
           if-no-files-found: 'warn'
+          compression-level: 0
