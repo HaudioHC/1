@@ -14,7 +14,7 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 7,
+            "likeCount": 8,
             "dislikeCount": 0,
             "heartCount": 4,
             "commentCount": 0
@@ -41,7 +41,7 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 6,
+            "likeCount": 7,
             "dislikeCount": 0,
             "heartCount": 0,
             "commentCount": 0
@@ -68,7 +68,7 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 2,
+            "likeCount": 3,
             "dislikeCount": 0,
             "heartCount": 0,
             "commentCount": 0
@@ -122,7 +122,7 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 4,
+            "likeCount": 5,
             "dislikeCount": 0,
             "heartCount": 2,
             "commentCount": 0
@@ -149,7 +149,7 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 5,
+            "likeCount": 6,
             "dislikeCount": 0,
             "heartCount": 2,
             "commentCount": 0
@@ -203,9 +203,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 3,
+            "likeCount": 4,
             "dislikeCount": 0,
-            "heartCount": 3,
+            "heartCount": 4,
             "commentCount": 0
         },
         "meta": null,
@@ -394,7 +394,7 @@
             "laughCount": 0,
             "likeCount": 7,
             "dislikeCount": 0,
-            "heartCount": 3,
+            "heartCount": 4,
             "commentCount": 0
         },
         "meta": null,
@@ -664,7 +664,7 @@
             "laughCount": 0,
             "likeCount": 8,
             "dislikeCount": 0,
-            "heartCount": 5,
+            "heartCount": 6,
             "commentCount": 0
         },
         "meta": null,
@@ -1852,7 +1852,7 @@
             "laughCount": 0,
             "likeCount": 10,
             "dislikeCount": 0,
-            "heartCount": 4,
+            "heartCount": 5,
             "commentCount": 0
         },
         "meta": null,
@@ -11707,7 +11707,7 @@
             "laughCount": 0,
             "likeCount": 11,
             "dislikeCount": 0,
-            "heartCount": 11,
+            "heartCount": 12,
             "commentCount": 0
         },
         "meta": null,
@@ -68039,7 +68039,7 @@
         "stats": {
             "cryCount": 9,
             "laughCount": 15,
-            "likeCount": 226,
+            "likeCount": 223,
             "dislikeCount": 0,
             "heartCount": 107,
             "commentCount": 0
@@ -94481,10 +94481,10 @@
         "postId": 24137251,
         "stats": {
             "cryCount": 16,
-            "laughCount": 26,
+            "laughCount": 27,
             "likeCount": 295,
             "dislikeCount": 0,
-            "heartCount": 157,
+            "heartCount": 164,
             "commentCount": 0
         },
         "meta": null,
@@ -94933,7 +94933,7 @@
             "laughCount": 77,
             "likeCount": 1042,
             "dislikeCount": 0,
-            "heartCount": 654,
+            "heartCount": 655,
             "commentCount": 3
         },
         "meta": null,
@@ -96974,7 +96974,7 @@
         "postId": 24015168,
         "stats": {
             "cryCount": 40,
-            "laughCount": 57,
+            "laughCount": 58,
             "likeCount": 897,
             "dislikeCount": 0,
             "heartCount": 590,
@@ -98861,9 +98861,9 @@
         "stats": {
             "cryCount": 14,
             "laughCount": 35,
-            "likeCount": 417,
+            "likeCount": 418,
             "dislikeCount": 0,
-            "heartCount": 225,
+            "heartCount": 228,
             "commentCount": 0
         },
         "meta": null,
@@ -99796,7 +99796,7 @@
             "laughCount": 26,
             "likeCount": 294,
             "dislikeCount": 0,
-            "heartCount": 159,
+            "heartCount": 160,
             "commentCount": 0
         },
         "meta": null,
