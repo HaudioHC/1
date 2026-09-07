@@ -1,11 +1,11 @@
-# Civitai 同步报告 - 2026-09-06 01:35:55 UTC
+# Civitai 同步报告 - 2026-09-07 01:34:23 UTC
 
 - **新增图片**: 2 张
 - **删除图片**: 0 张
 
 ## 新增图片详情
-- ID: 141894519, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/7ebd70c3-4128-4e33-af64-e3bbfee91365/original=true/7ebd70c3-4128-4e33-af64-e3bbfee91365.jpeg
-- ID: 141894521, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/d4087155-d555-412e-a7d5-6a4f794910f8/original=true/d4087155-d555-412e-a7d5-6a4f794910f8.jpeg
+- ID: 142008266, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/b705d46b-7cec-4ae0-9190-df16b9360220/original=true/b705d46b-7cec-4ae0-9190-df16b9360220.jpeg
+- ID: 142008319, URL: https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/a9039c9d-5d11-4d9a-ae09-b43cd00c753a/original=true/a9039c9d-5d11-4d9a-ae09-b43cd00c753a.jpeg
 
 ## 删除图片详情
 无
