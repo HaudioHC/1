@@ -14,9 +14,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 0,
+            "likeCount": 3,
             "dislikeCount": 0,
-            "heartCount": 0,
+            "heartCount": 1,
             "commentCount": 0
         },
         "meta": null,
@@ -41,9 +41,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 0,
+            "likeCount": 5,
             "dislikeCount": 0,
-            "heartCount": 0,
+            "heartCount": 1,
             "commentCount": 0
         },
         "meta": null,
@@ -68,9 +68,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 0,
+            "likeCount": 4,
             "dislikeCount": 0,
-            "heartCount": 0,
+            "heartCount": 1,
             "commentCount": 0
         },
         "meta": null,
@@ -95,9 +95,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 0,
+            "likeCount": 4,
             "dislikeCount": 0,
-            "heartCount": 1,
+            "heartCount": 2,
             "commentCount": 0
         },
         "meta": null,
@@ -122,9 +122,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 1,
+            "likeCount": 5,
             "dislikeCount": 0,
-            "heartCount": 0,
+            "heartCount": 2,
             "commentCount": 0
         },
         "meta": null,
@@ -149,9 +149,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 0,
+            "likeCount": 4,
             "dislikeCount": 0,
-            "heartCount": 0,
+            "heartCount": 1,
             "commentCount": 0
         },
         "meta": null,
@@ -176,9 +176,9 @@
         "stats": {
             "cryCount": 1,
             "laughCount": 0,
-            "likeCount": 4,
+            "likeCount": 6,
             "dislikeCount": 0,
-            "heartCount": 0,
+            "heartCount": 1,
             "commentCount": 0
         },
         "meta": null,
@@ -203,9 +203,9 @@
         "stats": {
             "cryCount": 1,
             "laughCount": 0,
-            "likeCount": 3,
+            "likeCount": 5,
             "dislikeCount": 0,
-            "heartCount": 0,
+            "heartCount": 1,
             "commentCount": 0
         },
         "meta": null,
@@ -230,9 +230,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 0,
-            "likeCount": 6,
+            "likeCount": 8,
             "dislikeCount": 0,
-            "heartCount": 0,
+            "heartCount": 1,
             "commentCount": 0
         },
         "meta": null,
@@ -65003,9 +65003,9 @@
         "stats": {
             "cryCount": 0,
             "laughCount": 3,
-            "likeCount": 65,
+            "likeCount": 64,
             "dislikeCount": 0,
-            "heartCount": 40,
+            "heartCount": 41,
             "commentCount": 0
         },
         "meta": null,
@@ -88168,7 +88168,7 @@
             "laughCount": 13,
             "likeCount": 136,
             "dislikeCount": 0,
-            "heartCount": 115,
+            "heartCount": 116,
             "commentCount": 0
         },
         "meta": null,
@@ -88880,7 +88880,7 @@
         "stats": {
             "cryCount": 17,
             "laughCount": 26,
-            "likeCount": 361,
+            "likeCount": 362,
             "dislikeCount": 0,
             "heartCount": 294,
             "commentCount": 0
@@ -95377,8 +95377,8 @@
         "postId": 24119708,
         "stats": {
             "cryCount": 48,
-            "laughCount": 78,
-            "likeCount": 1064,
+            "laughCount": 79,
+            "likeCount": 1065,
             "dislikeCount": 0,
             "heartCount": 678,
             "commentCount": 3
