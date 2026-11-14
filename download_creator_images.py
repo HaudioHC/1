@@ -1,5 +1,7 @@
 # download_creator_images.py
 import os
+import json
+import sys
 import requests
 import argparse
 import time
@@ -54,6 +56,42 @@ def setup_arguments():
 
     return parser.parse_args()
 
+FETCH_RETRIES = 4        # 列表页请求失败(429/5xx/超时)时的总尝试次数
+FETCH_BACKOFF = 2        # 指数退避基数(秒); 429 有 Retry-After 就按它等
+
+
+def fetch_json(url, params=None, timeout=20, attempts=FETCH_RETRIES):
+    """带重试的 GET。返回 (data, error)。
+
+    单张图有 --download-retries, 但列表页之前是「失败一次就 break」, 于是偶发的 429/503
+    会让整轮扫描提前截断, 这个用户的图片数就少了。这里按状态码退避重试, 429 优先用
+    Retry-After 里的秒数。
+    """
+    last = None
+    for attempt in range(1, attempts + 1):
+        try:
+            response = requests.get(url, params=params, timeout=timeout)
+            if response.status_code in (429, 500, 502, 503, 504):
+                raise requests.exceptions.HTTPError(f'HTTP {response.status_code}', response=response)
+            response.raise_for_status()
+            return response.json(), None
+        except Exception as e:
+            last = e
+            if attempt >= attempts:
+                break
+            retry_after = None
+            resp = getattr(e, 'response', None)
+            if resp is not None:
+                try:
+                    retry_after = float(resp.headers.get('Retry-After'))
+                except (TypeError, ValueError):
+                    retry_after = None
+            wait = retry_after if retry_after else FETCH_BACKOFF * attempt
+            print(f"  ↻ 请求失败(第 {attempt}/{attempts} 次), {wait:.0f}s 后重试: {e}")
+            time.sleep(wait)
+    return None, last
+
+
 def fetch_image_metadata_once(params, pass_index):
     """单次遍历所有页面，获取图片元数据。"""
     print(f"  --- 第 {pass_index} 轮扫描 ---")
@@ -62,28 +100,27 @@ def fetch_image_metadata_once(params, pass_index):
     is_first_page = True
 
     while next_url:
-        try:
-            response = requests.get(next_url, params=params if is_first_page else None, timeout=20)
-            response.raise_for_status()
-            data = response.json()
-            is_first_page = False
-            
-            items = data.get('items', [])
-            if not items:
-                break
-            
-            for item in items:
-                img_id = item.get('id')
-                if img_id is not None:
-                    images_by_id[img_id] = item
-            
-            print(f"  > 本轮已收集 {len(images_by_id)} 张图片...")
-            
-            next_url = data.get('metadata', {}).get('nextPage')
-        except requests.exceptions.RequestException as e:
-            print(f"  ✗ API请求失败: {e}")
+        data, error = fetch_json(next_url, params=params if is_first_page else None)
+        if error is not None:
+            # 重试耗尽: 保留本轮已收集的部分, 由后面的扫描轮次补漏
+            print(f"  ✗ API请求失败(已重试 {FETCH_RETRIES} 次): {error}")
             break
-            
+
+        is_first_page = False
+
+        items = data.get('items', [])
+        if not items:
+            break
+
+        for item in items:
+            img_id = item.get('id')
+            if img_id is not None:
+                images_by_id[img_id] = item
+
+        print(f"  > 本轮已收集 {len(images_by_id)} 张图片...")
+
+        next_url = data.get('metadata', {}).get('nextPage')
+
     print(f"  [*] 第 {pass_index} 轮扫描结束，本轮 {len(images_by_id)} 张。")
     return images_by_id
 
@@ -146,8 +183,16 @@ def process_and_download_image(image_info, output_path, jpeg_quality, max_retrie
         except Exception as e:
             last_error = e
             if attempt <= max_retries:
-                print(f"  ↻ 图片ID {image_id} 第 {attempt} 次失败，{DOWNLOAD_RETRY_DELAY}s 后重试: {e}")
-                time.sleep(DOWNLOAD_RETRY_DELAY * attempt)
+                # 429 优先按 Retry-After 等, 否则按次数递增退避
+                wait = DOWNLOAD_RETRY_DELAY * attempt
+                resp = getattr(e, 'response', None)
+                if resp is not None and resp.status_code == 429:
+                    try:
+                        wait = float(resp.headers.get('Retry-After'))
+                    except (TypeError, ValueError):
+                        wait = DOWNLOAD_RETRY_DELAY * attempt * 2
+                print(f"  ↻ 图片ID {image_id} 第 {attempt} 次失败，{wait:.0f}s 后重试: {e}")
+                time.sleep(wait)
             else:
                 break
 
@@ -193,10 +238,11 @@ def main():
     total_images = len(all_image_data)
     if total_images == 0:
         print("[*] 没有找到任何图片，程序退出。")
-        return
+        return 2        # 2 = 该用户名下确实没有图片(不是故障, 批量脚本不会再重试)
 
     # 2. 使用线程池进行下载和处理（带重试）
     print(f"[2/3] 开始使用 {args.threads} 个线程进行下载和转换（失败重试 {args.download_retries} 次）...")
+    failures = []
     with ThreadPoolExecutor(max_workers=args.threads) as executor:
         futures = [
             executor.submit(
@@ -208,14 +254,33 @@ def main():
             )
             for img_data in all_image_data
         ]
-        
+
         for future in as_completed(futures):
             result = future.result()
             if result:
                 print(result)
+                failures.append(result.strip())
 
     print("\n[*] 所有图片处理完成。")
-    
+    print(f"[*] 成功 {download_count}/{total_images} 张，失败 {len(failures)} 张。")
+
+    # 失败清单落盘（写在 output 根目录，不会被打进分卷 zip），便于判断重跑时补哪几张
+    if failures:
+        report_path = os.path.join(args.output_dir, f"_{args.username}_failed.json")
+        try:
+            with open(report_path, 'w', encoding='utf8') as f:
+                json.dump({"username": args.username, "total": total_images,
+                           "success": download_count, "failures": failures},
+                          f, ensure_ascii=False, indent=2)
+            print(f"[*] 失败清单已写入 {report_path}，重跑本用户即可补齐缺图。")
+        except Exception as e:
+            print(f"  ✗ 写入失败清单出错: {e}")
+
+    # 一张都没下成就返回非 0，让批量脚本判定为「需要重试」
+    if download_count == 0:
+        print("\n[FAIL] 一张图片都没能下载成功。")
+        return 1
+
     # 3. 创建ZIP压缩包
     if not args.no_zip:
         zip_filename = f"civitai_{args.username}_images.zip"
@@ -225,6 +290,7 @@ def main():
         print("[*] 已跳过创建ZIP压缩包。JPEG文件保存在 " + temp_image_dir)
 
     print("\n[SUCCESS] 所有任务已完成！")
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
